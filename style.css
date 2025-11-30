@@ -1,0 +1,203 @@
+:root{--accent:#ff3366;--glass:rgba(255,255,255,0.06)}
+html,body{height:100%;margin:0;background:#000;color:#fff;font-family:Inter,Arial;overflow: hidden;}
+body::-webkit-scrollbar {
+    display: none;
+}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;overflow:hidden}
+#bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;z-index:0;filter:brightness(0.45)}
+
+.card{position:relative;z-index:2;max-width:520px;width:100%;background:rgba(255,255,255,0.02);backdrop-filter:blur(6px);border-radius:14px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.avatar{width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid rgba(255,255,255,0.06)}
+.avatar img{width:100%;height:100%;object-fit:cover}
+
+/* Kontener na linki */
+.links{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap: wrap;}
+
+/* Styl ikon */
+.social-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: #fff;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  position: relative;
+}
+.social-icon svg {
+  width: 36px;
+  height: 36px;
+  fill: #fff;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+.social-icon:hover {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
+}
+
+/* Specyficzne kolory poświaty (opcjonalne) */
+.social-icon.twitch:hover { filter: drop-shadow(0 0 12px rgba(169, 112, 255, 0.6)); }
+.social-icon.insta:hover { filter: drop-shadow(0 0 12px rgba(225, 48, 108, 0.6)); }
+.social-icon.tiktok:hover { filter: drop-shadow(0 0 12px rgba(0, 242, 234, 0.6)); }
+.social-icon.discord:hover { filter: drop-shadow(0 0 12px rgba(88, 101, 242, 0.6)); }
+
+/* TOOLTIP DLA DISCORDA */
+.social-icon.discord::before {
+  content: attr(data-tooltip); 
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+/* Strzałeczka w dół od tooltipa */
+.social-icon.discord::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.85) transparent transparent transparent;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.social-icon.discord:hover::before,
+.social-icon.discord:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* --- PASEK DOLNY --- */
+.bottom-bar {
+  position:fixed;
+  left:12px;
+  bottom:12px;
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap: 8px;
+}
+
+.now-playing {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.3);
+  padding: 4px 8px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  display: none;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vol-control {
+  background:rgba(0,0,0,0.45);
+  padding:6px 10px;
+  border-radius:8px;
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;
+}
+.vol-control input{width:120px; cursor: pointer;}
+
+.enable-sound {
+  position:fixed;
+  right:12px;
+  bottom:12px;
+  z-index:30;
+  background:linear-gradient(180deg,#111,#000);
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.06);
+  font-size:13px;
+  display:none;
+  align-items:center;
+  gap:8px;
+}
+.enable-sound button{
+  background:var(--accent);
+  border:none;
+  color:#100;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.small {font-size:13px;color:rgba(255,255,255,0.75)}
+
+/* Kontener dla tekstu i pinezki */
+.pin-line {
+  display: flex;
+  align-items: center; /* Wyśrodkowuje w pionie */
+  justify-content: center; /* Wyśrodkowuje w poziomie */
+  gap: 6px; /* Odstęp między ikoną a tekstem */
+  font-size: 14px; /* Możesz dostosować rozmiar, jeśli jest za duży/mały */
+  margin-top: -10px; /* Lekkie podniesienie do góry, żeby wyglądało lepiej pod H1 */
+}
+
+/* Styl samej ikony pinezki */
+.pin-icon {
+  width: 14px;
+  height: 14px;
+  fill: rgba(255, 255, 255, 0.75); /* Kolor dopasowany do tekstu .small */
+  transform: rotate(-10deg); /* Lekkie przechylenie dla efektu */
+}
+/* style.css (dodaj na końcu) */
+
+/* 1. Definicja animacji: przesuwa element w lewo o 100% jego szerokości */
+@keyframes marquee {
+    0% { transform: translateX(100%); } /* Zaczyna poza prawą krawędzią */
+    100% { transform: translateX(-100%); } /* Kończy poza lewą krawędzią */
+}
+
+/* 2. Styl dla wewnętrznego elementu, który będzie się ruszał */
+.now-playing-text {
+    /* Ustawienie animacji: 
+       - marquee: nazwa
+       - 15s: czas trwania (możesz zmienić, im większa liczba, tym wolniej)
+       - linear: stała prędkość
+       - infinite: powtarza się w nieskończoność
+    */
+    animation: marquee 25s linear infinite;
+    display: inline-block; /* Musi być inline-block, aby działało poprawnie */
+}
+/* style.css */
+
+/* ... (istniejący kod) ... */
+
+/* Specyficzne kolory poświaty (opcjonalne) */
+.social-icon.twitch:hover { filter: drop-shadow(0 0 12px rgba(169, 112, 255, 0.6)); }
+.social-icon.insta:hover { filter: drop-shadow(0 0 12px rgba(225, 48, 108, 0.6)); }
+.social-icon.tiktok:hover { filter: drop-shadow(0 0 12px rgba(0, 242, 234, 0.6)); }
+.social-icon.discord:hover { filter: drop-shadow(0 0 12px rgba(88, 101, 242, 0.6)); }
+
+/* === DODANE NOWE STYLE IKON === */
+.social-icon.steam:hover { filter: drop-shadow(0 0 12px rgba(0, 173, 239, 0.6)); } /* Kolor Steam */
+.social-icon.roblox:hover { filter: drop-shadow(0 0 12px rgba(230, 0, 0, 0.6)); } /* Kolor Roblox */
+.social-icon.namemc:hover { filter: drop-shadow(0 0 12px rgba(50, 205, 50, 0.6)); } /* Kolor NameMC/Limonkowy */
+.social-icon.github:hover { filter: drop-shadow(0 0 12px rgba(100, 100, 100, 0.6)); } /* Kolor Github */
+
+/* ... (reszta kodu CSS) ... */
