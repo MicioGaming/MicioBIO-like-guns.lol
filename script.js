@@ -88,8 +88,8 @@ async function getFiles(path, jsonPath, exts){
     localStorage.setItem(VOL_KEY, volSlider.value);
   });
 
-  const videos = await getFiles('/video/', '/videos.json', videoExt);
-  const musics = await getFiles('/music/', '/music.json', audioExt);
+  const videos = await getFiles('video/', 'videos.json', videoExt);
+  const musics = await getFiles('music/', 'music.json', audioExt);
 
   if(videos.length){
     const v = rand(videos);
@@ -99,7 +99,7 @@ async function getFiles(path, jsonPath, exts){
 
     if(musics.length){
         const a = rand(musics);
-        const srcPath = a.file.startsWith('http') || a.file.includes('/') ? a.file : '/music/' + encodeURIComponent(a.file);     
+        const srcPath = a.file.startsWith('http') || a.file.includes('/') ? a.file : 'music/' + encodeURIComponent(a.file);     
         audio.src = srcPath;
         audio.load();
         
@@ -121,4 +121,5 @@ async function getFiles(path, jsonPath, exts){
   }
 
   audio.loop = true;
+
 })();
