@@ -88,17 +88,21 @@ async function getFiles(path, jsonPath, exts){
     localStorage.setItem(VOL_KEY, volSlider.value);
   });
 
+  // POPRAWKA 1: Usunięcie ukośnika z /video/ i /videos.json
   const videos = await getFiles('video/', 'videos.json', videoExt);
+  // POPRAWKA 2: Usunięcie ukośnika z /music/ i /music.json
   const musics = await getFiles('music/', 'music.json', audioExt);
 
   if(videos.length){
     const v = rand(videos);
-    bg.src = '/video/' + (v.file.startsWith('http') ? v.file : encodeURIComponent(v.file));
+    // POPRAWKA 3: Usunięcie ukośnika przed 'video/'
+    bg.src = 'video/' + (v.file.startsWith('http') ? v.file : encodeURIComponent(v.file));
     bg.load();
   }
 
     if(musics.length){
         const a = rand(musics);
+        // POPRAWKA 4: Usunięcie ukośnika przed 'music/'
         const srcPath = a.file.startsWith('http') || a.file.includes('/') ? a.file : 'music/' + encodeURIComponent(a.file);     
         audio.src = srcPath;
         audio.load();
@@ -121,5 +125,4 @@ async function getFiles(path, jsonPath, exts){
   }
 
   audio.loop = true;
-
 })();
