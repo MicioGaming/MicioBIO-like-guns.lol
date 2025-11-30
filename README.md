@@ -27,7 +27,7 @@ Projekt nie wymaga żadnych zewnętrznych zależności ani narzędzi poza przegl
 
 1.  **Sklonuj Repozytorium:**
     ```bash
-    git clone [https://github.com/MicioGaming/MicioHub.git](https://github.com/MicioGaming/MicioBIO-like-guns.lol.git)
+    git clone https://github.com/MicioGaming/MicioBIO-like-guns.lol.git
     ```
 2.  **Przejdź do Katalogu:**
     ```bash
